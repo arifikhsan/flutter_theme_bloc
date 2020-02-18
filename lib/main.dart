@@ -44,7 +44,10 @@ class CounterPage extends StatelessWidget {
             ),
             body: Center(
               child: Container(
-                child: Text('$count'),
+                child: Text(
+                  '$count',
+                  style: TextStyle(fontSize: 36),
+                ),
               ),
             ),
             floatingActionButton: Column(
