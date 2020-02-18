@@ -34,59 +34,63 @@ class CounterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Theme with Flutter Bloc'),
-      ),
-      body: BlocProvider<CounterBloc>(
-        create: (contextq) => CounterBloc(),
-        child: BlocBuilder<CounterBloc, int>(
-          builder: (contextq, count) {
-            return Center(
+    return BlocProvider(
+      create: (context) => CounterBloc(),
+      child: BlocBuilder<CounterBloc, int>(
+        builder: (context, count) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Theme with Flutter Bloc'),
+            ),
+            body: Center(
               child: Container(
                 child: Text('$count'),
               ),
-            );
-          },
-        ),
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: FloatingActionButton(
-              child: Icon(Icons.add),
-              backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () {
-                context.bloc<CounterBloc>().add(CounterEvent.increment);
-              },
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: FloatingActionButton(
-              child: Icon(Icons.remove),
-              backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () =>
-                  context.bloc<CounterBloc>().add(CounterEvent.decrement),
+            floatingActionButton: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: FloatingActionButton(
+                    child: Icon(Icons.add),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    onPressed: () {
+                      // context.bloc<CounterBloc>().add(CounterEvent.increment);
+                      BlocProvider.of<CounterBloc>(context)
+                          .add(CounterEvent.increment);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: FloatingActionButton(
+                    child: Icon(Icons.remove),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    onPressed: () =>
+                        context.bloc<CounterBloc>().add(CounterEvent.decrement),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: FloatingActionButton(
+                    child: Icon(
+                      Icons.update,
+                      color: Colors.white,
+                    ),
+                    backgroundColor: Theme.of(context).primaryColor,
+                    onPressed: () {
+                      // context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
+                      BlocProvider.of<ThemeBloc>(context)
+                          .add(ThemeEvent.toggle);
+                    },
+                  ),
+                ),
+              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4),
-            child: FloatingActionButton(
-              child: Icon(
-                Icons.update,
-                color: Colors.white,
-              ),
-              backgroundColor: Theme.of(context).primaryColor,
-              onPressed: () {
-                context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
-              },
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
