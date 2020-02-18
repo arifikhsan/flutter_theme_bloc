@@ -55,7 +55,6 @@ class CounterPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: FloatingActionButton(
                     child: Icon(Icons.add),
-                    backgroundColor: Theme.of(context).primaryColor,
                     onPressed: () {
                       // context.bloc<CounterBloc>().add(CounterEvent.increment);
                       BlocProvider.of<CounterBloc>(context)
@@ -67,7 +66,6 @@ class CounterPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: FloatingActionButton(
                     child: Icon(Icons.remove),
-                    backgroundColor: Theme.of(context).primaryColor,
                     onPressed: () =>
                         context.bloc<CounterBloc>().add(CounterEvent.decrement),
                   ),
@@ -77,9 +75,7 @@ class CounterPage extends StatelessWidget {
                   child: FloatingActionButton(
                     child: Icon(
                       Icons.update,
-                      color: Colors.white,
                     ),
-                    backgroundColor: Theme.of(context).primaryColor,
                     onPressed: () {
                       // context.bloc<ThemeBloc>().add(ThemeEvent.toggle);
                       BlocProvider.of<ThemeBloc>(context)
